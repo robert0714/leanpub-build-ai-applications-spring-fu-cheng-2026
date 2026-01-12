@@ -1,0 +1,36 @@
+services:
+  model-runner:
+    container_name: model-runner
+    image: ghcr.io/ggml-org/llama.cpp:server
+    volumes:
+      - model-files:/models
+    command:
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8080"
+      - "-n"
+      - "512"
+      - "-m"
+      - "/models/Qwen3-0.6B-Q8_0.gguf"
+    ports:
+      - "8180:8080"
+    depends_on:
+      model-downloader:
+        condition: service_completed_successfully
+
+  model-downloader:
+    container_name: model-downloader
+    image: ghcr.io/alexcheng1982/model-downloader
+    restart: "no"
+    volumes:
+      - model-files:/models
+    command:
+      - "hf"
+      - "download"
+      - "unsloth/Qwen3-0.6B-GGUF"
+      - "Qwen3-0.6B-Q8_0.gguf"
+      - "--local-dir"
+      - "/models"
+volumes:
+  model-files:
