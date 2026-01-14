@@ -44,6 +44,7 @@ services:
 volumes:
   ollama-data:
     driver: local
+    name: "ollama_models_volume"
 networks:
   ollama-docker:
     external: false

@@ -57,6 +57,7 @@ volumes:
     driver: local
   ollama-data:
     driver: local
+    name: "ollama_models_volume"
 
 networks:
   ollama-docker:
