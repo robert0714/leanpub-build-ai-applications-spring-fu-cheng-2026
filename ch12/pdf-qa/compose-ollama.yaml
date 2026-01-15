@@ -1,0 +1,61 @@
+services:
+  ollama:
+    container_name: ollama
+    image: ollama/ollama
+    ports:
+      - "8180:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    restart: unless-stopped
+    tty: true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434"]
+      interval: 30s
+      timeout: 10s
+      retries: 5 
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_HOST=0.0.0.0
+    networks:
+      - ollama-docker
+
+  ollama-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: ollama-webui
+    volumes:
+      - ./ollama/ollama-webui:/app/backend/data
+    depends_on:
+      - ollama
+    ports:
+      - 8080:8080
+    environment: # https://docs.openwebui.com/getting-started/env-configuration#default_models
+      - OLLAMA_BASE_URLS=http://host.docker.internal:8180 #comma separated ollama hosts
+      - ENV=dev
+      - WEBUI_AUTH=False
+      - WEBUI_NAME=valiantlynx AI
+      - WEBUI_URL=http://localhost:8080
+      - WEBUI_SECRET_KEY=t0p-s3cr3t
+      - NO_PROXY=host.docker.internal 
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: unless-stopped
+    networks:
+      - ollama-docker
+  postgres:
+    image: pgvector/pgvector:0.8.1-pg16
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: "postgres"  
+      POSTGRES_USER: "postgres"  #  psql -U postgres -d postgres
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"
+volumes:
+  postgresql-data:
+  ollama-data:
+    driver: local
+    name: "ollama_models_volume"
+networks:
+  ollama-docker:
+    external: false  

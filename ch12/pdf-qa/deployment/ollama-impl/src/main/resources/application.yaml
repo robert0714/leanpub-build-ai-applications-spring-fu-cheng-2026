@@ -1,0 +1,28 @@
+server:
+  port: 8063
+spring:
+  config:
+    import:
+      - optional:classpath:config/shared.yaml
+  ai:
+    ollama:
+      chat:
+        options:
+          model: "phi3" # ollama pull phi3
+          temperature: 0
+      embedding:
+        options:
+          model: "bge-large"  # ollama pull bge-large
+          # temperature: 0.7
+      base-url: http://localhost:8180  
+      init:
+        pull-model-strategy: when-missing
+        timeout: 10m
+
+    vectorstore:
+      pgvector:
+        # index-type: HNSW
+        # initialize-schema: true
+        # distance-type: COSINE_DISTANCE
+        dimensions: 1024
+        # max-document-batch-size: 10000        

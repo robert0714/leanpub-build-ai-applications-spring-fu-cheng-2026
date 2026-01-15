@@ -1,0 +1,19 @@
+server:
+  port: 8063
+spring:
+  config:
+    import:
+      - optional:classpath:config/shared.yaml
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:demo}
+      chat:
+        enabled: true
+        options:
+          model: gpt-5-mini
+          temperature: 0.0
+      embedding:
+        enabled: true
+        options:
+          model: text-embedding-3-small
+      # base-url: http://localhost:8180    
