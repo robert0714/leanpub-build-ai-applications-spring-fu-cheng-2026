@@ -125,5 +125,9 @@ The inspector runs both an MCP Inspector (MCPI) client UI (default port 6274) an
       }
     }
     ```
- 
+## HTTP SSE Server
+* references
+  * https://github.com/stantonk/mcp-server-java-sse-http-demo
+  * https://www.youtube.com/watch?v=Y_Rk6QgWUbE
+  * https://github.com/danvega/javaone-mcp
 
