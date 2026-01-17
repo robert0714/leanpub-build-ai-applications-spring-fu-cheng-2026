@@ -1,21 +1,8 @@
-# Chapter 13 MCP Quick Start
-## MCP Introduction
-MCP (Model Context Protocol) defines two roles: server and client.The server and the client interact with each other using a standard protocol. MCP server is responsible for providing knowledge, including prompt templates, resources, and tools. MCP client interacts with the server to obtain these knowledge, including getting prompts, the content of resources, and invoking tools. A JSON-RPC based protocol is used between the server and the client.
+* https://www.youtube.com/watch?v=Y_Rk6QgWUbE
+* https://github.com/danvega/javaone-mcp
+* https://github.com/stantonk/mcp-server-java-sse-http-demo
 
-* Official Document: https://modelcontextprotocol.io/sdk/java/mcp-server
-* Microsoft Document:  https://github.com/microsoft/mcp-for-beginners
-## Java Development Basics
-In order to add the MCP SDK dependencies to the project, we can import the mcp-bom dependency first.
-[See mcp-bom dependency](https://github.com/JavaAIDev/easy-mcp-client/blob/main/pom.xml#L73-L79)
-
-The MCP SDK contains several modules, and in most cases we will only need to use the [mcp module](https://github.com/JavaAIDev/easy-mcp-client/blob/main/pom.xml#L30-L33). This module already contains the MCP server and client implementations, as well as the basic implementation of stdio and HTTP transports.
-## stdio server
-* Spring-ai document: https://docs.spring.io/spring-ai/reference/api/mcp/mcp-stdio-sse-server-boot-starter-docs.html
-* Official Document: 
-  * https://modelcontextprotocol.io/docs/develop/build-server#java
-  * https://modelcontextprotocol.io/sdk/java/mcp-server#server-transport-providers
-  * https://modelcontextprotocol.io/sdk/java/mcp-server#sync-api-2
- 
+# MCP Inspector
 ## Running the MCP Inspector
 ### Requirements
 * Node.js: ^22.7.5
@@ -41,8 +28,7 @@ In MCP Inspector web UI:
 * Arguments: `-jar D:/Data/workspaces/STS-5.0.x/leanpub-build-ai-applications-spring-fu-cheng-2026/ch13/simple-mcp-server/target/simple-mcp-server-0.0.1-SNAPSHOT.jar`
 * Next Step: cleck `Connect`
 
-The inspector runs both an MCP Inspector (MCPI) client UI (default port 6274) and an MCP Proxy (MCPP) server (default port 6277). Open the MCPI client UI in your browser to use the inspector. (These ports are derived from the T9 dialpad mapping of MCPI and MCPP respectively, as a mnemonic). 
-## Running  Claude Desktop
+## Running Claude Desktop
 * Reference: https://modelcontextprotocol.io/docs/develop/connect-local-servers
 * Configuration
   * Location: 
@@ -53,7 +39,6 @@ The inspector runs both an MCP Inspector (MCPI) client UI (default port 6274) an
     {
       "mcpServers": {
         "my-custom-server": {
-          "type": "stdio",
           "command": "java",
           "args": [
             "-jar",  
@@ -67,7 +52,7 @@ The inspector runs both an MCP Inspector (MCPI) client UI (default port 6274) an
   Claude Desktop's log help you discover th Errors：
   * macOS: `~/Library/Logs/Claude/mcp.log`
   * Windows: `%APPDATA%\Claude\logs\mcp.log`  or `%USERPROFILE%\AppData\Roaming\Claude\logs\mcp.log`  
- 
+  * 
 ## Running GitHub Copilot in Visual Studio Code (VS Code)
 * Reference: 
   * https://vscode.com.tw/docs/copilot/customization/mcp-servers
@@ -100,7 +85,6 @@ The inspector runs both an MCP Inspector (MCPI) client UI (default port 6274) an
 * Logs
   * https://vscode.com.tw/docs/copilot/customization/mcp-servers#_troubleshoot-and-debug-mcp-servers
 
-
 ## Running Google Antigravity
 * Reference: 
   * https://codelabs.developers.google.com/getting-started-google-antigravity?hl=zh-tw#1
@@ -126,4 +110,3 @@ The inspector runs both an MCP Inspector (MCPI) client UI (default port 6274) an
     }
     ```
  
-
