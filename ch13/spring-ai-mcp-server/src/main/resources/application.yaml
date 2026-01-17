@@ -1,0 +1,22 @@
+server:   
+  port: 8080
+spring:
+  main:
+    banner-mode: off
+  jackson: 
+    locale: zh_TW
+    time-zone: Asia/Taipei
+  servlet:
+    multipart:
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+  ai:
+    mcp:
+      server:        
+        name: sample-server
+        version: 0.0.1
+        stdio: false
+        sse-message-endpoint: /mcp/message
+        sse-endpoint: /sse
+        type: SYNC

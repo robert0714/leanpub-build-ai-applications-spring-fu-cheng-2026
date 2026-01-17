@@ -132,7 +132,7 @@ The inspector runs both an MCP Inspector (MCPI) client UI (default port 6274) an
   * https://github.com/danvega/javaone-mcp
 
 
-# MCP Client
+## MCP Client
 * https://modelcontextprotocol.io/docs/develop/build-client#java
 
 ```bash
@@ -145,3 +145,4 @@ java -jar ./target/simple-mcp-client-0.0.1-SNAPSHOT.jar D:\Data\workspaces\STS-5
 [main] INFO dev.danvega.javaone.SimpleStdioClient - Tool call callToolResult: CallToolResult[content=[TextContent[audience=null, priority=null, text=Basic YWRtaW46cGFzc3dvcmQ=]], isError=false]
 [parallel-4] WARN io.modelcontextprotocol.client.transport.StdioClientTransport - Process terminated with code 1
 ```
+## Spring Integration

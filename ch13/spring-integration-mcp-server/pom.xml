@@ -5,16 +5,29 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dev.danvega</groupId>
-    <artifactId>simple-mcp-server</artifactId> 
+    <artifactId>spring-integration-mcp-server</artifactId> 
     <version>0.0.1-SNAPSHOT</version>
-	<name>simple-mcp-server</name>
+	<name>spring-integration-mcp-server</name>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<mcp-bom.version>0.10.0</mcp-bom.version>
     </properties>
 
 	<dependencies>
+	    <dependency>
+			<groupId>io.modelcontextprotocol.sdk</groupId>
+			<artifactId>mcp-spring-webmvc</artifactId>
+			<version>${mcp-bom.version}</version> 
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>io.modelcontextprotocol.sdk</groupId>
+		    <artifactId>mcp-spring-webflux</artifactId>
+		    <version>${mcp-bom.version}</version> 
+		    <scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>io.modelcontextprotocol.sdk</groupId>
 			<artifactId>mcp</artifactId>
@@ -42,7 +55,7 @@
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-servlet</artifactId>
 			<version>11.0.26</version>
-			<!-- <scope>provided</scope> -->
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Test -->
@@ -68,7 +81,7 @@
 			<dependency>
 				<groupId>io.modelcontextprotocol.sdk</groupId>
 				<artifactId>mcp-bom</artifactId>
-				<version>0.10.0</version>
+				<version>${mcp-bom.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -103,7 +116,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>dev.danvega.javaone.SimpleStdioServer</mainClass>
+                                    <mainClass>dev.danvega.javaone.SpringApplication</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

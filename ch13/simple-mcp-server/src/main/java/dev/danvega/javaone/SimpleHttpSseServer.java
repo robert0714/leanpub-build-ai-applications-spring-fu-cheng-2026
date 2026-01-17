@@ -20,7 +20,9 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory; 
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.databind.ObjectMapper; 
 
 public class SimpleHttpSseServer{ 
 	private static final Logger log = LoggerFactory.getLogger(SimpleHttpSseServer.class);
@@ -34,17 +36,22 @@ public class SimpleHttpSseServer{
 	   /**
          * Note, HttpServletSseServerTransportProvider extends HttpServlet
          */
-		HttpServletSseServerTransportProvider provider = HttpServletSseServerTransportProvider.builder()
-				      .messageEndpoint("/messages")
-				     .build();
 		
+//		HttpServletSseServerTransportProvider provider = HttpServletSseServerTransportProvider.builder()
+//				      .messageEndpoint("/messages")
+//				     .build();
+		 HttpServletSseServerTransportProvider provider =
+		            new HttpServletSseServerTransportProvider(new ObjectMapper(), "/mcp/message");
+		 
 		// Create a server with custom configuration
 		McpSyncServer syncServer = McpServer.sync(provider)
 		    .serverInfo("Sample", "1.0.0")
 		    .capabilities(ServerCapabilities.builder()
-		       .logging()
-		       .tools(false)
-		       .build())
+		    		.resources(true, true)     // Enable resource support
+                    .tools(true)               // Enable tool support
+                    .prompts(true)             // Enable prompt support
+                    .logging()                 // Enable logging support
+                    .build())
 		    .tools(CALCULATE_HTTP_BASIC_AUTH_HEADER)
 		    .build();
 
@@ -59,8 +66,8 @@ public class SimpleHttpSseServer{
 		ServletHolder servletHolder = new ServletHolder(provider);
 		contextHandler.addServlet(servletHolder, "/*");
 		
-		// Start Jetty on port 9000
-        Server server = new Server(9000);
+		// Start Jetty on port 8080
+        Server server = new Server(8080);
         server.setHandler(contextHandler);
         
         try {
