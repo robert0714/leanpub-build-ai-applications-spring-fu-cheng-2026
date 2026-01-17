@@ -29,9 +29,10 @@ docker run --rm \
   ghcr.io/modelcontextprotocol/inspector:latest
 ```
 In MCP Inspector web UI:
-* Transport Type: `STIDO`
-* Command: `java` 
-* Arguments: `-jar D:/Data/workspaces/STS-5.0.x/leanpub-build-ai-applications-spring-fu-cheng-2026/ch13/spring-integration-mcp-server/target/spring-integration-mcp-server-0.0.1-SNAPSHOT.jar`
+* Transport Type: `SSE`
+* URL: `http://localhost:8080/sse` 
+* Connection Type: `Via Proxy`
+* Logging Level: `debug`
 * Next Step: cleck `Connect`
 
 ## Running Claude Desktop
