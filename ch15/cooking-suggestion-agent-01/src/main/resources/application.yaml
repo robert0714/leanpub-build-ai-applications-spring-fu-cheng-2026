@@ -1,0 +1,59 @@
+server:
+  port: 8063
+spring:
+  application:
+    name: cooking-agent
+  threads.virtual.enabled: true
+  config:
+    import: "optional:file:.env"
+  elasticsearch:
+    uris: http://localhost:9200
+  ai:
+    chat:
+      observations:
+    #        log-prompt: true
+    #        log-completion: true
+    ollama:
+      base-url: http://localhost:8180
+      chat:
+        options:
+          model: llama3.1:8b
+          temperature: 0
+      init: 
+        pull-model-strategy: when-missing
+        timeout: 10m
+    vectorstore:
+      elasticsearch:
+        indexName: cooking-agent
+        initializeSchema: true
+    # mcp.client:
+    #   type: ASYNC
+    #   toolcallback:
+    #     enabled: true
+    #   stdio:
+    #     connections:
+    #       food:
+    #         command: docker
+    #         args:
+    #           - run
+    #           - "-i"
+    #           - "ghcr.io/javaaidev/usda-fooddata-central-mcp-server:1.0.0"
+# management:
+#   tracing:
+#     sampling:
+#       probability: 1.0
+#   observations:
+#     annotations:
+#       enabled: true
+#   otlp:
+#     metrics:
+#       export:
+#         enabled: false
+#     logging:
+#       export:
+#         enabled: false
+# otel:
+#   metrics:
+#     exporter: none
+#   logs:
+#     exporter: none
